@@ -247,11 +247,19 @@
         let kasData = [];
 
         document.addEventListener('DOMContentLoaded', () => {
+            // Set default dates
             const today = new Date().toISOString().split('T')[0];
             document.getElementById('absenDate').value = today;
             document.getElementById('kasDate').value = today;
             
-            Promise.all([loadMembers(), loadAbsensi(), loadKas()]);
+            // Trigger all data fetches simultaneously instead of one-by-one
+            Promise.all([
+                loadMembers(),
+                loadAbsensi(),
+                loadKas()
+            ]).catch(error => {
+                console.error("Initial data load failed:", error);
+            });
         });
 
         // --- MEMBERS ---
