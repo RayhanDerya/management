@@ -251,10 +251,7 @@
             document.getElementById('absenDate').value = today;
             document.getElementById('kasDate').value = today;
             
-            loadMembers().then(() => {
-                loadAbsensi();
-                loadKas();
-            });
+            Promise.all([loadMembers(), loadAbsensi(), loadKas()]);
         });
 
         // --- MEMBERS ---
