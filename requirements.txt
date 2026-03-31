@@ -7,3 +7,6 @@ urllib3
 python-dotenv
 google-generativeai
 django-cors-headers
+django
+dj-database-url
+psycopg2-binary
