@@ -1,6 +1,9 @@
 from django.db import models
 
+from django.contrib.auth.models import User
+
 class Member(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -14,6 +17,7 @@ class Absensi(models.Model):
         ('Sakit', 'Sakit'),
         ('Alpha', 'Alpha'),
     ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateField()
     member = models.ForeignKey(Member, on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES)
@@ -27,6 +31,7 @@ class UangKas(models.Model):
         ('masuk', 'Pemasukan'),
         ('keluar', 'Pengeluaran'),
     ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
     date = models.DateField()
     description = models.CharField(max_length=200) 
     member = models.ForeignKey(Member, on_delete=models.SET_NULL, null=True, blank=True)
@@ -36,3 +41,5 @@ class UangKas(models.Model):
 
     def __str__(self):
         return f"{self.description} - {self.amount}"
+
+
